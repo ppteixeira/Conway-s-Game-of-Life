@@ -13,6 +13,24 @@ class Board
       end
     end
   end
+
+  def start_game
+    loop do
+      print show_board
+      sleep 0.5
+    end
+  end
+
+  def show_board
+    system "clear"
+    @board.each do |row|
+      puts ''
+      row.each do |element|
+        print element.result
+      end; nil
+    end
+  end
 end
 
-binding.pry
+b = Board.new
+b.show_board

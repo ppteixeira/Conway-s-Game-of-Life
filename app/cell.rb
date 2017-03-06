@@ -1,8 +1,8 @@
 class Cell
-  attr_reader :x , :y
+
   def initialize(x, y)
     @x = x
     @y = y
-    @on = false
+    @on = [true,false].sample
   end
 end

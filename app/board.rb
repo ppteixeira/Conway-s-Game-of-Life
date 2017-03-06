@@ -1,5 +1,6 @@
 require './cell'
 require 'pry'
+require 'io/console'
 class Board
 
   def initialize(collumns = 80, rows = 20)
@@ -16,8 +17,10 @@ class Board
 
   def start_game
     loop do
-      print show_board
-      sleep 0.5
+      show_board
+      binding.pry
+      play_action
+      sleep(0.5)
     end
   end
 
@@ -27,10 +30,19 @@ class Board
       puts ''
       row.each do |element|
         print element.result
-      end; nil
+        element.find_neighbours(@board)
+      end
+    end
+  end
+
+  def play_action
+    @board.each do |row|
+      row.each do |element|
+        element.play_move
+      end;
     end
   end
 end
-
+binding.pry
 b = Board.new
-b.show_board
+b.start_game

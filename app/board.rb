@@ -1,6 +1,5 @@
 require './cell'
 require 'pry'
-require 'io/console'
 class Board
 
   def initialize(collumns = 80, rows = 20)
@@ -19,7 +18,6 @@ class Board
     loop do
       show_board
       look_neighbours
-      binding.pry
       play_action
       sleep(0.5)
     end

@@ -1,38 +1,42 @@
 require './cell'
 require 'pry'
 class Board
-
-  def initialize(collumns = 80, rows = 20)
-    @board = create_board(rows, collumns)
+  def initialize(columns = 80, rows = 20)
+    @board = create_board(rows, columns)
+    start_game
   end
 
-  def create_board(rows, collumns)
+  def create_board(rows, columns)
     (0...rows).collect do |row|
-      (0...collumns).collect do |collumn|
-        Cell.new(row, collumn)
+      (0...columns).collect do |column|
+        Cell.new(row, column)
       end
     end
   end
 
   def start_game
     loop do
+      sleep(0.5)
       show_board
       look_neighbours
-      play_action
-      sleep(0.5)
+      play_one_round
     end
   end
 
   def show_board
     system "clear"
     @board.each do |row|
+      #best way I found to go to next line, but there might be better ways
       puts ''
       row.each do |element|
-        print element.result
+        print element.print_on_screen
       end
     end
   end
 
+  # The core command coul be implemented inside show_board but it would not have
+  # separation of concerns, although it would require less loops.
+  # But definitely must be called before play_one_round
   def look_neighbours
     @board.each do |row|
       row.each do |element|
@@ -41,13 +45,13 @@ class Board
     end
   end
 
-  def play_action
+  def play_one_round
     @board.each do |row|
       row.each do |element|
-        element.play_move
+        element.play_next_move
       end
     end
   end
 end
-b = Board.new
-b.start_game
+
+game_of_life = Board.new

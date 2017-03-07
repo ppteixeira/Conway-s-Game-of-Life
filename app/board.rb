@@ -1,17 +1,26 @@
-require './cell'
-require 'pry'
+require_relative 'cell'
+require 'json'
+
 class Board
-  def initialize(columns = 80, rows = 20)
-    @board = create_board(rows, columns)
-    start_game
+  def initialize(customized = false ,columns = 80, rows = 20)
+    @board = create_board(rows, columns, customized)
+    customized ? set_custom_board : start_game
   end
 
-  def create_board(rows, columns)
+  def create_board(rows, columns, customized)
     (0...rows).collect do |row|
       (0...columns).collect do |column|
-        Cell.new(row, column)
+        Cell.new(row, column, customized)
       end
     end
+  end
+
+  def set_custom_board
+    points = JSON.parse(File.read("data/glider_gun.json"))
+    points.each do |row,column|
+      @board[row][column].turn_on
+    end
+    start_game
   end
 
   def start_game
@@ -53,5 +62,3 @@ class Board
     end
   end
 end
-
-game_of_life = Board.new

@@ -1,12 +1,11 @@
 class Cell
-
   attr_accessor :cell_col , :cell_row
 
-  def initialize(row, column)
+  def initialize(row, column, custom)
     @cell_col = column
     @cell_row = row
-    @state = ['ON','OFF','OFF'].sample
     @neighbours_alive = 0
+    custom ? @state = 'OFF' : @state = ['ON','OFF','OFF'].sample
   end
 
   def print_on_screen

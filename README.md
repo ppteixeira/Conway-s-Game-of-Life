@@ -11,7 +11,7 @@
   1. Print the status of the board to the screen
 
 
-* Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or diagonally adjacent. At eafch step in time, the following transitions occur:
+* Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:
 
 * Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
 * Any live cell with two or three live neighbours lives on to the next generation.
@@ -29,11 +29,12 @@
 
   The first thing to be done was the `Class Board`.
 
-  It initialises with a default size of 20 rows and 80 columns
+  It initializes with a default size of 20 rows and 80 columns
 
   Creates a board with those dimensions and inside each column inserts an instance of `class Cell`.
 
-  From this point it calls the method `start_game` which controls the sequence of actions.
+  At this point it will check if the board is customised. In case it is,  `set_custom_board` method is called.
+  Otherwise `start_game` method, which controls the sequence of actions, is called.
 
   During the loop those actions take place in this order:
   * Waits for half second
@@ -43,7 +44,11 @@
 
 ### Cell  
 
-  Each cell is initialized with two parameters `row` and `column` that is their position on the board.
+  Each cell is initialized with three parameters `row`,`column` that are their position on the board, and `custom` that informs if the board is customised.
+
+  * Customised --> All cells will have an initial '@state' as `"OFF"`.
+  * Not customised --> Each cell will have a random value of `"ON"` or `"OFF"`
+
   Once they are created they wait for method calls to perform any action.
 
   Their first method called is `print_on_screen`, called by `Board.show_board`, that returns the character to be printed according to it's `@state` (`"ON"` || `"OFF"`).

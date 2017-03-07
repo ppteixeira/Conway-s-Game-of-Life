@@ -1,6 +1,6 @@
 require_relative 'cell'
 require 'json'
-
+require 'pry'
 class Board
   def initialize(customized = false ,columns = 80, rows = 20)
     @board = create_board(rows, columns, customized)
@@ -16,7 +16,7 @@ class Board
   end
 
   def set_custom_board
-    points = JSON.parse(File.read("data/glider_gun.json"))
+    points = JSON.parse(File.read("app/data/glider_gun.json"))
     points.each do |row,column|
       @board[row][column].turn_on
     end

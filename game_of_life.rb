@@ -1,5 +1,5 @@
 require 'io/console'
-require_relative "board"
+require "./app/board"
 
 system 'clear'
 puts "--------------------------------------"
@@ -21,7 +21,7 @@ begin
   if  option < '1' || option > '3'
     system 'clear'
     puts "--------------------------------------"
-    puts "-     OPTION INVALID! Try again...   -"
+    puts "- #{option}   OPTION INVALID! Try again...   -"
     puts "--------------------------------------"
   end
 end until option == '1' || option == '2' || option == '3'
